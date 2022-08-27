@@ -1,0 +1,23 @@
+/* --- colors --- */
+$basic-white: #ffffff;
+$basic-black: #000000;
+$font-color: #29323c;
+$background-color: #e2ebf0;
+$background-card: rgba(41, 50, 60, 0.07);
+$feature-color: rgba(41, 50, 60, 0.8);
+$feature-color-study: rgba(27, 118, 31, 0.8);
+$feature-color-commerce: rgba(215, 107, 0, 1);
+$feature-color-pet: rgba(133, 70, 110, 1);
+$gradient-link: linear-gradient(to right, transparent, $font-color 20%, $font-color 80%, transparent);
+$link-color: rgba(42, 82, 152, 0.8);
+$title-decoration: #c1cddb;
+
+/* --- content-width --- */
+$content-width: 1040px;
+
+/* --- breakpoints --- */
+$desktop-width: 1600px;
+$less-desktop-width: 1200px;
+$tablet-width: 1023px;
+$mobile-width: 767px;
+$less-mobile-width: 500px;

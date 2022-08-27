@@ -1,0 +1,161 @@
+.about__wrapper {
+  max-width: $content-width;
+  margin: auto;
+  padding-bottom: 140px;
+  padding-left: 18px;
+  padding-right: 18px;
+
+  & h2 {
+    margin-top: 0;
+    font-size: 32px;
+    font-weight: 500;
+    position: relative;
+    text-transform: lowercase;
+    display: inline-block;
+    margin-bottom: 50px;
+
+    &::before {
+      content: "<h2>";
+      position: absolute;
+      font-size: 30px;
+      color: $title-decoration;
+      z-index: -1;
+      top: -10px;
+      left: 0;
+      pointer-events: none;
+    }
+
+    &::after {
+      content: "</h2>";
+      position: absolute;
+      font-size: 34px;
+      color: $title-decoration;
+      z-index: 1;
+      bottom: -20px;
+      left: 0;
+      pointer-events: none;
+    }
+  }
+}
+
+.about__container {
+  display: flex;
+}
+
+.about__info-wrapper {
+  margin-left: 40px;
+
+  & p {
+    margin-top: 0;
+    font-size: 18px;
+  }
+
+  & span {
+    font-weight: 500;
+    font-size: 17px;
+    letter-spacing: -0.06em;
+  }
+}
+
+@media (max-width: $less-desktop-width) {
+  .about__info-wrapper {
+    margin-right: 40px;
+  }
+}
+
+@media (max-width: $tablet-width) {
+
+  .about__container {
+    flex-direction: column-reverse;
+
+    & img {
+      padding-top: 20px;
+    }
+
+  }
+
+
+  .about__wrapper {
+    & h2 {
+      font-size: 26px;
+    }
+  }
+
+  .about__info-wrapper {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+@media (max-width: $mobile-width) {
+  .about__wrapper {
+    & h2 {
+      font-size: 26px;
+
+      &::before {
+        font-size: 24px;
+        top: -8px;
+      }
+
+      &::after {
+        font-size: 28px;
+        bottom: -18px;
+      }
+
+    }
+  }
+
+  .about__container {
+    align-items: flex-start;
+
+    & img {
+      width: 200px;
+      height: auto;
+      object-fit: contain;
+    }
+  }
+
+  .about__info-wrapper {
+    // margin-left: 18px;
+
+    & p {
+      font-size: 16px;
+    }
+  }
+}
+
+@media (max-width: $less-mobile-width) {
+  .about__wrapper {
+    padding-bottom: 120px;
+
+    & h2 {
+      font-size: 24px;
+      margin-bottom: 30px;
+
+      &::before {
+        font-size: 22px;
+        top: -6px;
+      }
+
+      &::after {
+        font-size: 26px;
+        bottom: -16px;
+      }
+    }
+  }
+
+  .about__container {
+    & img {
+      width: 240px;
+    }
+    // flex-direction: column;
+  }
+
+  .about__info-wrapper {
+    margin-left: 0;
+
+    & span {
+      font-size: 15px;
+    }
+  }
+}
