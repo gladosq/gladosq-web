@@ -64,16 +64,13 @@
 }
 
 @media (max-width: $tablet-width) {
-
   .about__container {
     flex-direction: column-reverse;
 
     & img {
       padding-top: 20px;
     }
-
   }
-
 
   .about__wrapper {
     & h2 {
@@ -101,7 +98,6 @@
         font-size: 28px;
         bottom: -18px;
       }
-
     }
   }
 
@@ -116,8 +112,6 @@
   }
 
   .about__info-wrapper {
-    // margin-left: 18px;
-
     & p {
       font-size: 16px;
     }
@@ -148,7 +142,6 @@
     & img {
       width: 240px;
     }
-    // flex-direction: column;
   }
 
   .about__info-wrapper {

@@ -1,0 +1,285 @@
+"use strict";
+
+(function () {
+  var faqItem = document.querySelectorAll('.faq__item');
+  faqItem.forEach(function (item) {
+    item.addEventListener('click', function () {
+      item.classList.toggle('faq__item--active');
+    });
+  });
+})();
+"use strict";
+
+(function () {
+  var filterButtons = document.querySelectorAll('.catalog__filter span');
+  filterButtons.forEach(function (item) {
+    item.addEventListener('click', function (evt) {
+      evt.target.parentNode.classList.toggle('catalog__filter--active');
+    });
+  });
+  var filterResetButton = document.querySelector('.catalog__button-clear');
+
+  if (filterResetButton !== null) {
+    filterResetButton.addEventListener('click', function (evt) {
+      evt.preventDefault();
+      resetAllFilters();
+    });
+  }
+
+  function resetAllFilters() {
+    document.getElementById('necklaces').checked = false;
+    document.getElementById('chokers').checked = false;
+    document.getElementById('rings').checked = false;
+    document.getElementById('earrings').checked = false;
+    document.getElementById('gold').checked = false;
+    document.getElementById('silver').checked = false;
+    document.getElementById('pink').checked = false;
+    document.getElementById('dreams').checked = false;
+  }
+
+  var filterMobileButton = document.querySelector('.catalog__filter-mobile');
+  var filterForm = document.querySelector('.catalog__form');
+  var overlayCatalog = document.querySelector('.overlay-catalog');
+  var filterMobileOverlay = document.querySelector('.filter');
+  var filterMobileCloseButton = document.querySelector('.filter button');
+
+  if (filterMobileButton !== null) {
+    filterMobileButton.addEventListener('click', function () {
+      showFilter();
+      overlayCatalog.addEventListener('click', hideFilter);
+    });
+  }
+
+  function showFilter() {
+    filterForm.classList.add('catalog__form--active');
+    document.body.classList.add('no-scroll');
+    overlayCatalog.classList.remove('hidden');
+    filterMobileOverlay.style.display = 'block';
+  }
+
+  function hideFilter() {
+    filterForm.classList.remove('catalog__form--active');
+    overlayCatalog.classList.add('hidden');
+    document.body.classList.remove('no-scroll');
+    filterMobileOverlay.style.display = 'none';
+  }
+
+  if (filterMobileCloseButton !== null) {
+    filterMobileCloseButton.addEventListener('click', hideFilter);
+  }
+})();
+"use strict";
+
+(function () {
+  var modal = document.querySelector('.modal');
+  var overlay = document.querySelector('.overlay');
+  var openModalButton = document.querySelector('.header__login-link');
+  var modalCloseButton = document.querySelector('.modal__close-button');
+  var openMobileModalButton = document.querySelector('.header__login-mobile-link');
+  var inputMail = document.getElementById('email');
+  var modalSendData = document.querySelector('.modal__wrapper form button');
+  var modalEmailInput = document.querySelector('.modal__email-input');
+  var modalTitle = document.querySelector('.modal__wrapper h2');
+  modalTitle.addEventListener('click', function () {
+    console.log('work');
+    document.querySelector('.modal__tab-top').focus();
+  });
+  var modalTabBottom = document.querySelector('.modal__tab-bottom');
+  modalTabBottom.addEventListener('focus', function () {
+    modalCloseButton.focus();
+  });
+  modalSendData.addEventListener('click', function () {
+    localStorage.setItem('phone', inputMail.value);
+  });
+
+  if (openModalButton !== null) {
+    openModalButton.addEventListener('click', function (evt) {
+      evt.preventDefault();
+      showModal();
+      window.addEventListener('keydown', hideModalHandler);
+      modalCloseButton.addEventListener('click', hideModalHandler);
+      overlay.addEventListener('click', hideModalHandler);
+    });
+  }
+
+  if (openMobileModalButton !== null) {
+    openMobileModalButton.addEventListener('click', function (evt) {
+      evt.preventDefault();
+      fixPromoHeight();
+      showModal();
+      window.addEventListener('keydown', hideModalHandler);
+      modalCloseButton.addEventListener('click', hideModalHandler);
+      overlay.addEventListener('click', hideModalHandler);
+    });
+  }
+
+  function showModal() {
+    modal.classList.remove('hidden');
+    modalEmailInput.focus();
+    overlay.classList.remove('hidden');
+    document.body.classList.add('no-scroll');
+  }
+
+  function hideModal() {
+    modal.classList.add('hidden');
+    overlay.classList.add('hidden');
+    document.body.classList.remove('no-scroll');
+  }
+
+  function hideModalHandler(evt) {
+    if (evt.type === 'keydown' && evt.key !== 'Escape') {
+      return;
+    }
+
+    hideModal();
+    window.removeEventListener('keydown', hideModalHandler);
+    modalCloseButton.removeEventListener('click', hideModalHandler);
+    overlay.removeEventListener('click', hideModalHandler);
+  }
+
+  function fixPromoHeight() {
+    var headerWrapper = document.querySelector('.header__wrapper');
+    var promoBlock = document.querySelector('.promo');
+    var promoBlockCatalog = document.querySelector('.catalog-promo');
+    var mobileWidth = window.matchMedia('(min-width: 0px) and (max-width: 767px)');
+
+    if (headerWrapper.classList.contains('header__wrapper--active')) {
+      headerWrapper.classList.remove('header__wrapper--active');
+      document.body.classList.remove('no-scroll');
+
+      if (document.querySelector('.promo') === null) {
+        if (mobileWidth.matches) {
+          promoBlockCatalog.style.marginTop = '-10px';
+        } else {
+          promoBlockCatalog.style.marginTop = '-10px';
+        }
+      } else {
+        if (mobileWidth.matches) {
+          promoBlock.style.marginTop = '-25px';
+        } else {
+          promoBlock.style.marginTop = '-19px';
+        }
+      }
+    } else {
+      headerWrapper.classList.add('header__wrapper--active');
+      document.body.classList.add('no-scroll');
+
+      if (document.querySelector('.promo') === null) {
+        if (mobileWidth.matches) {
+          promoBlockCatalog.style.marginTop = '107px';
+        } else {
+          promoBlockCatalog.style.marginTop = '120px';
+        }
+      } else {
+        if (mobileWidth.matches) {
+          promoBlock.style.marginTop = '86px';
+        } else {
+          promoBlock.style.marginTop = '120px';
+        }
+      }
+    }
+  }
+})();
+"use strict";
+
+(function () {
+  var menuButton = document.querySelector('.header__mobile-hamburger');
+  var mobileWidth = window.matchMedia('(min-width: 0px) and (max-width: 767px)');
+
+  function menuButtonHandler() {
+    fixPromoHeight();
+  }
+
+  function fixPromoHeight() {
+    var headerWrapper = document.querySelector('.header__wrapper');
+    var promoBlock = document.querySelector('.promo');
+    var promoBlockCatalog = document.querySelector('.catalog-promo');
+
+    if (headerWrapper.classList.contains('header__wrapper--active')) {
+      headerWrapper.classList.remove('header__wrapper--active');
+      document.body.classList.remove('no-scroll');
+
+      if (document.querySelector('.promo') === null) {
+        if (mobileWidth.matches) {
+          promoBlockCatalog.style.marginTop = '-10px';
+        } else {
+          promoBlockCatalog.style.marginTop = '-10px';
+        }
+      } else {
+        if (mobileWidth.matches) {
+          promoBlock.style.marginTop = '-25px';
+        } else {
+          promoBlock.style.marginTop = '-19px';
+        }
+      }
+    } else {
+      headerWrapper.classList.add('header__wrapper--active');
+      document.body.classList.add('no-scroll');
+
+      if (document.querySelector('.promo') === null) {
+        if (mobileWidth.matches) {
+          promoBlockCatalog.style.marginTop = '107px';
+        } else {
+          promoBlockCatalog.style.marginTop = '120px';
+        }
+      } else {
+        if (mobileWidth.matches) {
+          promoBlock.style.marginTop = '86px';
+        } else {
+          promoBlock.style.marginTop = '120px';
+        }
+      }
+    }
+  }
+
+  if (menuButton !== null) {
+    menuButton.addEventListener('click', menuButtonHandler);
+  }
+})();
+"use strict";
+
+(function () {
+  var swiperWidth = window.matchMedia('(min-width: 0px) and (max-width: 1200px)');
+  var arrowsMobileWidth = window.matchMedia('(min-width: 0px) and (max-width: 767px)');
+
+  if (arrowsMobileWidth.matches) {
+    var swiper = new Swiper('.swiper-container', {
+      direction: 'horizontal',
+      loop: false,
+      spaceBetween: 100,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: 'true',
+        type: 'custom',
+        renderCustom: function renderCustom(swiper, current, total) {
+          return current + '&nbsp;&nbsp;of&nbsp;&nbsp;' + total;
+        }
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev'
+      }
+    });
+  } else {
+    var _swiper = new Swiper('.swiper-container', {
+      direction: 'horizontal',
+      loop: false,
+      spaceBetween: 100,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: 'true',
+        renderBullet: function renderBullet(index, className) {
+          return '<span class="' + className + '">' + (index + 1) + "</span>";
+        }
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev'
+      }
+    });
+
+    if (!swiperWidth.matches) {
+      _swiper.allowTouchMove = false;
+    }
+  }
+})();
